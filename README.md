@@ -1,4 +1,4 @@
-# lesson-van
+# lesson-one
 
 ## Project setup
 ```
