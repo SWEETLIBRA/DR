@@ -2,8 +2,9 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <!-- <button @click="increment">{{counter}}</button> -->
     <Calc />
+    <!-- <Calc v-if="!show" :key="2"/>
+    <button @click="show = !show">click</button> -->
   </div>
 </template>
 
@@ -18,12 +19,9 @@ export default {
     Calc
   },
   data: () => ({
-    counter: 0
+    keyBoards: false
   }),
   methods: {
-    increment () {
-      this.counter++
-    }
   }
 }
 </script>
