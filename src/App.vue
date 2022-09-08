@@ -2,11 +2,12 @@
   <div id="app">
     <!-- <Calc /> -->
     <header>
-      <div class="header">My personal costs</div>
+      <div class="header">My personal costs: {{ totalCost }}</div>
     </header>
     <main>
       <AddPaymentForm
         @add-payment="addPayment"
+        :categoryList="categoryList"
       />
       <PaymentsDisplay
         :paymentsList="paymentsList"
@@ -20,6 +21,7 @@
 // import Calc from '@/components/Calc'
 import PaymentsDisplay from '@/components/PaymentsDisplay'
 import AddPaymentForm from '@/components/AddPaymentForm'
+import { mapActions, mapMutations, mapGetters } from 'vuex'
 
 export default {
   name: 'App',
@@ -28,34 +30,20 @@ export default {
     PaymentsDisplay, AddPaymentForm
   },
   data: () => ({
-    paymentsList: []
   }),
+  computed: {
+    ...mapGetters(['paymentsList', 'categoryList', 'totalCost'])
+  },
   methods: {
-    fetchPaymentsData () {
-      return [
-        {
-          date: '28.03.2020',
-          category: 'Food',
-          value: 169
-        },
-        {
-          date: '28.03.2020',
-          category: 'Transport',
-          value: 160
-        },
-        {
-          date: '28.03.2020',
-          category: 'Food',
-          value: 162
-        }
-      ]
-    },
+    ...mapActions(['fetchData', 'fetchCategoryData']),
+    ...mapMutations(['ADD_PAYMENT_DATA']),
     addPayment (data) {
-      this.paymentsList.push(data)
+      this.$store.commit('ADD_PAYMENT_DATA', data)
     }
   },
   created () {
-    this.paymentsList = this.fetchPaymentsData()
+    this.fetchCategoryData()
+    this.fetchData()
   }
 }
 </script>

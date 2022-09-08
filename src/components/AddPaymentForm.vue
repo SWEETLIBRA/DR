@@ -2,7 +2,15 @@
   <div>
     <div>
       <input type="text" placeholder="Amount" v-model="value">
-      <input type="text" placeholder="Type" v-model="category">
+      <select v-model="category">
+        <option
+          v-for="category of categoryList"
+          :value="category"
+          :key="category"
+          >
+          {{ category }}
+        </option>
+      </select>
       <input type="text" placeholder="Date" v-model="date">
       <button @click="addPayment">ADD NEW COST +</button>
     </div>
@@ -12,6 +20,11 @@
 <script>
 export default {
   name: 'AddPaymentForm',
+  props: {
+    categoryList: {
+      type: Array
+    }
+  },
   data: () => ({
     value: '',
     category: '',
