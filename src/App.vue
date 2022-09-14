@@ -1,27 +1,42 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <Calc />
-    <!-- <Calc v-if="!show" :key="2"/>
-    <button @click="show = !show">click</button> -->
+    <!-- <Calc /> -->
+    <header class=" header">
+      <nav>
+        <router-link to="dashboard" class="router-link">Dashboard</router-link>
+        <router-link to="about" class="router-link">About</router-link>
+        <router-link to="notfound" class="router-link">Not Found</router-link>
+      </nav>
+    </header>
+    <main>
+      <router-view />
+      <!-- <button @click="goToPage">Dashboard</button> -->
+    </main>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import Calc from '@/components/Calc'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
-    Calc
   },
   data: () => ({
-    keyBoards: false
   }),
   methods: {
+    // goToPage () {
+    //   this.$router.push({
+    //     name: 'addNewPaymentFood',
+    //     query: {
+    //       category: 'Food',
+    //       value: 200
+    //     }
+    //   })
+    // }
+  },
+  mounted () {
+    // console.log(this.$router)
+    // console.log(this.$route)
   }
 }
 </script>
@@ -34,5 +49,13 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.header {
+  padding: 5px;
+}
+
+.router-link {
+  margin: 0 5px;
 }
 </style>
