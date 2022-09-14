@@ -1,49 +1,42 @@
 <template>
   <div id="app">
     <!-- <Calc /> -->
-    <header>
-      <div class="header">My personal costs: {{ totalCost }}</div>
+    <header class=" header">
+      <nav>
+        <router-link to="dashboard" class="router-link">Dashboard</router-link>
+        <router-link to="about" class="router-link">About</router-link>
+        <router-link to="notfound" class="router-link">Not Found</router-link>
+      </nav>
     </header>
     <main>
-      <AddPaymentForm
-        @add-payment="addPayment"
-        :categoryList="categoryList"
-      />
-      <PaymentsDisplay
-        :paymentsList="paymentsList"
-        show
-      />
+      <router-view />
+      <!-- <button @click="goToPage">Dashboard</button> -->
     </main>
   </div>
 </template>
 
 <script>
-// import Calc from '@/components/Calc'
-import PaymentsDisplay from '@/components/PaymentsDisplay'
-import AddPaymentForm from '@/components/AddPaymentForm'
-import { mapActions, mapMutations, mapGetters } from 'vuex'
 
 export default {
   name: 'App',
   components: {
-    // Calc
-    PaymentsDisplay, AddPaymentForm
   },
   data: () => ({
   }),
-  computed: {
-    ...mapGetters(['paymentsList', 'categoryList', 'totalCost'])
-  },
   methods: {
-    ...mapActions(['fetchData', 'fetchCategoryData']),
-    ...mapMutations(['ADD_PAYMENT_DATA']),
-    addPayment (data) {
-      this.$store.commit('ADD_PAYMENT_DATA', data)
-    }
+    // goToPage () {
+    //   this.$router.push({
+    //     name: 'addNewPaymentFood',
+    //     query: {
+    //       category: 'Food',
+    //       value: 200
+    //     }
+    //   })
+    // }
   },
-  created () {
-    this.fetchCategoryData()
-    this.fetchData()
+  mounted () {
+    // console.log(this.$router)
+    // console.log(this.$route)
   }
 }
 </script>
@@ -56,5 +49,13 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.header {
+  padding: 5px;
+}
+
+.router-link {
+  margin: 0 5px;
 }
 </style>
