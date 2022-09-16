@@ -12,31 +12,39 @@
       <router-view />
       <!-- <button @click="goToPage">Dashboard</button> -->
     </main>
+    <transition name="fade">
+      <ModalWindowAddPayment
+      v-if="showModal"
+      :settings="modalSettings"
+    />
+    </transition>
   </div>
 </template>
 
 <script>
+// import ModalWindowAddPayment from '@/components/ModalWindowAddPayment'
 
 export default {
   name: 'App',
   components: {
+    ModalWindowAddPayment: () => import(/* webpackChunkName: "ModalWindow" */'@/components/ModalWindowAddPayment')
   },
   data: () => ({
+    showModal: false,
+    modalSettings: {}
   }),
   methods: {
-    // goToPage () {
-    //   this.$router.push({
-    //     name: 'addNewPaymentFood',
-    //     query: {
-    //       category: 'Food',
-    //       value: 200
-    //     }
-    //   })
-    // }
+    modalOpen (settings) {
+      this.modalSettings = settings
+      this.showModal = true
+    },
+    modalClose () {
+      this.showModal = false
+    }
   },
   mounted () {
-    // console.log(this.$router)
-    // console.log(this.$route)
+    this.$modal.EventBus.$on('show', this.modalOpen)
+    this.$modal.EventBus.$on('hide', this.modalClose)
   }
 }
 </script>
@@ -57,5 +65,12 @@ export default {
 
 .router-link {
   margin: 0 5px;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .8s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>

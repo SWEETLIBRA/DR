@@ -1,8 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Dashboard from '@/pages/Dashboard'
-import About from '@/pages/About'
-import NotFound from '@/pages/NotFound'
 
 Vue.use(VueRouter)
 const router = new VueRouter({
@@ -11,32 +8,34 @@ const router = new VueRouter({
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: Dashboard
+      component: () => import(/* webpackCunkName: "dashboard" */'../pages/Dashboard.vue')
     },
     {
       path: '/dashboard/add/:payment/:category',
       name: 'addNewPaymentFood',
-      component: Dashboard
+      component: () => import(/* webpackCunkName: "dashboard" */'../pages/Dashboard.vue')
     },
     {
       path: '/dashboard/add/:payment/:category',
       name: 'addNewPaymentTransport',
-      component: Dashboard
+      component: () => import(/* webpackCunkName: "dashboard" */'../pages/Dashboard.vue')
     },
     {
       path: '/dashboard/add/:payment/:category',
       name: 'addNewPaymentEducation',
-      component: Dashboard
+      component: () => import(/* webpackCunkName: "dashboard" */'../pages/Dashboard.vue')
     },
+
     {
       path: '/about',
       name: 'about',
-      component: About
+      component: () => import(/* webpackCunkName: "about" */'../pages/About.vue')
     },
+
     {
       path: '/notfound',
       name: 'notfound',
-      component: NotFound
+      component: () => import(/* webpackCunkName: "notfound" */'../pages/NotFound.vue')
     }
   ]
 })
