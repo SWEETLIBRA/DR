@@ -2,8 +2,8 @@
   <div>
     <div class="error" v-if="error">{{error}}</div>
     <div class="main">
-      <input type="number" v-model.number="number">
-      <input type="number" v-model.number="number2">
+      <input type="number" v-model.number="number" name="number">
+      <input type="number" v-model.number="number2" name="number2">
       = {{ result }}
     </div>
     <div class="keyboard">
@@ -11,6 +11,7 @@
           v-for="operation of operations"
           @click="calculate(operation)"
           :key="operation"
+          :name="operation"
       >{{ operation }}</button>
     </div>
     <div>

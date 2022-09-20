@@ -10,7 +10,6 @@
     </header>
     <main>
       <router-view />
-      <!-- <button @click="goToPage">Dashboard</button> -->
     </main>
     <transition name="fade">
       <ModalWindowAddPayment
@@ -22,7 +21,6 @@
 </template>
 
 <script>
-// import ModalWindowAddPayment from '@/components/ModalWindowAddPayment'
 
 export default {
   name: 'App',
