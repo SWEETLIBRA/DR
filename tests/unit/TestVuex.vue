@@ -9,7 +9,7 @@
 import { mapActions } from 'vuex'
 
 export default {
-  name: "TestVuex",
+  name: 'TestVuex',
   data: () => {
     return {
       prop: ''

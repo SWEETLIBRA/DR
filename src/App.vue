@@ -1,74 +1,55 @@
 <template>
-  <div id="app">
-    <!-- <Calc /> -->
-    <header class=" header">
-      <nav>
-        <router-link to="dashboard" class="router-link">Dashboard</router-link>
-        <router-link to="about" class="router-link">About</router-link>
-        <router-link to="notfound" class="router-link">Not Found</router-link>
-      </nav>
-    </header>
-    <main>
-      <router-view />
-    </main>
-    <transition name="fade">
-      <ModalWindowAddPayment
-      v-if="showModal"
-      :settings="modalSettings"
-    />
-    </transition>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
+
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        />
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <router-view/>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
 
 export default {
   name: 'App',
-  components: {
-    ModalWindowAddPayment: () => import(/* webpackChunkName: "ModalWindow" */'@/components/ModalWindowAddPayment')
-  },
+
   data: () => ({
-    showModal: false,
-    modalSettings: {}
-  }),
-  methods: {
-    modalOpen (settings) {
-      this.modalSettings = settings
-      this.showModal = true
-    },
-    modalClose () {
-      this.showModal = false
-    }
-  },
-  mounted () {
-    this.$modal.EventBus.$on('show', this.modalOpen)
-    this.$modal.EventBus.$on('hide', this.modalClose)
-  }
+    //
+  })
 }
 </script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-.header {
-  padding: 5px;
-}
-
-.router-link {
-  margin: 0 5px;
-}
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .8s;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
-</style>
