@@ -18,26 +18,31 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'AddPaymentForm',
-  props: {
-    categoryList: {
-      type: Array
-    }
-  },
+  // props: {
+  //   categoryList: {
+  //     type: Array
+  //   }
+  // },
   data: () => ({
     value: '',
     category: '',
     date: ''
   }),
   methods: {
+    ...mapActions(['addNewPayment']),
     addPayment () {
       const { value, category, date, currentDate } = this
-      const data = { value, category, date: date || currentDate }
-      this.$emit('add-payment', data)
+      const data = { value: +value, category, date: date || currentDate }
+      this.addNewPayment(data)
+      // this.$emit('add-payment', data)
     }
   },
   computed: {
+    ...mapGetters(['categoryList']),
     currentDate () {
       const currentDate = new Date()
       const day = currentDate.getDate()

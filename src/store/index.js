@@ -13,6 +13,9 @@ export default new Vuex.Store({
   getters: {
   },
   actions: {
+    addNewPayment ({ commit }, newPayment) {
+      commit('ADD_PAYMENT_DATA', newPayment)
+    }
   },
   modules: {
     categoryList, paymentsList

@@ -23,7 +23,7 @@
 <script>
 import AddPaymentForm from '@/components/AddPaymentForm'
 import Auth from '@/components/Auth'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'ModalWindowAddPayment',
@@ -34,7 +34,6 @@ export default {
   },
   components: { AddPaymentForm, Auth },
   computed: {
-    ...mapGetters(['categoryList']),
     title () {
       return this.settings?.title || 'Modal window'
     }
@@ -42,7 +41,7 @@ export default {
   methods: {
     ...mapActions(['addNewPayment']),
     addPayment (data) {
-      this.$store.commit('ADD_PAYMENT_DATA', data)
+      this.addNewPayment(data)
     },
     closeModal () {
       this.$modal.hide()
