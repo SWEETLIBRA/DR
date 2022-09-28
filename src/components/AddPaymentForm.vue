@@ -1,5 +1,15 @@
 <template>
-  <div>
+  <v-card class="text-left pa-8">
+    <v-text-field v-model="date" label="Date"/>
+    <v-select
+      v-model="category"
+      label="Category"
+      :items="categoryList"
+    />
+    <v-text-field v-model="value" label="Value"/>
+    <v-btn @click="addPayment">Add new cost</v-btn>
+  </v-card>
+  <!-- <div>
     <div>
       <input type="text" placeholder="Amount" v-model="value">
       <select v-model="category">
@@ -14,7 +24,7 @@
       <input type="text" placeholder="Date" v-model="date">
       <button @click="addPayment">ADD NEW COST +</button>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -22,11 +32,6 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'AddPaymentForm',
-  // props: {
-  //   categoryList: {
-  //     type: Array
-  //   }
-  // },
   data: () => ({
     value: '',
     category: '',
