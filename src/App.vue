@@ -1,38 +1,47 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <Calc />
-    <!-- <Calc v-if="!show" :key="2"/>
-    <button @click="show = !show">click</button> -->
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="indigo lighten-3"
+      dark
+    >
+    <v-btn to="/dashboard" plain>Dashboard</v-btn>
+    <v-btn to="/about" plain>About</v-btn>
+    </v-app-bar>
+
+    <v-main>
+    <router-view/>
+    </v-main>
+    <transition name="fade">
+      <ModalWindowAddPayment
+        v-if="showModal"
+        :settings="modalSettings"
+      />
+    </transition>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import Calc from '@/components/Calc'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld,
-    Calc
-  },
+  components: { ModalWindowAddPayment: () => import(/* webpackChunkName: "ModalWindow" */'@/components/ModalWindowAddPayment') },
   data: () => ({
-    keyBoards: false
+    showModal: false,
+    modalSettings: {}
   }),
   methods: {
+    modalOpen (settings) {
+      this.modalSettings = settings
+      this.showModal = true
+    },
+    modalClose () {
+      this.showModal = false
+    }
+  },
+  mounted () {
+    this.$modal.EventBus.$on('show', this.modalOpen)
+    this.$modal.EventBus.$on('hide', this.modalClose)
   }
 }
 </script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
